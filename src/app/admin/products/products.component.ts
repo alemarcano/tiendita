@@ -24,8 +24,8 @@ export class ProductsComponent {
     public auth: AuthService,
   ) {
     this.productService.products().valueChanges().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort;
+      this.dataSource = new MatTableDataSource(data); //Tabla con datos
+      this.dataSource.sort = this.sort; //aqui la vamos a ordernar
     },
     err => {
       this.snackService.launch("Error obteniendo productos: " + err.message, "Productos", 5000);
@@ -34,7 +34,7 @@ export class ProductsComponent {
 
   applyFilter(filterValue) {
     filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
+    filterValue = filterValue.toLowerCase(); 
     this.dataSource.filter = filterValue;
   }
 
@@ -53,7 +53,7 @@ export class ProductsComponent {
 
   private static dialogConfig(data): MatDialogConfig {
     const config: MatDialogConfig = new MatDialogConfig;
-    config.width = '700px';
+    config.width = '700px'; //ventana modal de 700 px
     config.data = data;
     return config;
   }

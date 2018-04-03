@@ -7,7 +7,7 @@ import * as faker from 'faker';
 @Injectable()
 export class UploadService {
 
-  private basePath = '/products';
+  private basePath = '/products'; //carpeta de Storage donde guardo los productos
 
   constructor(private afs: AngularFirestore,) {}
 
@@ -19,16 +19,16 @@ export class UploadService {
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
-        // in progress
+       //en progreso subiendo el archivo
         const snap = snapshot as firebase.storage.UploadTaskSnapshot;
         progress.percentage = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
       },
       (error) => {
-        // fail
+        
         console.log(error);
       },
       () => {
-        // success
+        
         fileUpload.id = fileId;
         fileUpload.url = uploadTask.snapshot.downloadURL;
         fileUpload.name = fileUpload.file.name;

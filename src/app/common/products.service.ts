@@ -30,7 +30,7 @@ export class ProductsService {
 
   save(product: Product): Promise<any> {
     product.id = faker.random.alphaNumeric(16); //librerias para crear datos falsos, para tener bd con informacion
-    return this.products().doc(product.id).set(Object.assign({}, product));
+    return this.products().doc(product.id).set(Object.assign({}, product)); //tenemos que insertar un objeto en firesotre
   }
 
   update(product: Product): Promise<any> { //retorna por el id el producto que quieres modificar

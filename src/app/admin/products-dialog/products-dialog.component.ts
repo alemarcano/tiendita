@@ -19,7 +19,7 @@ export class ProductsDialogComponent {
 
   constructor(
     private afs: AngularFirestore,
-    public dialogRef: MatDialogRef<ProductsDialogComponent>,
+    public dialogRef: MatDialogRef<ProductsDialogComponent>, //referencia para poder cerrarla la ventana
     @Inject(MAT_DIALOG_DATA) public data: Product,
     private snackService: SnackService,
     public auth: AuthService,
@@ -38,14 +38,14 @@ export class ProductsDialogComponent {
   }
 
   saveProduct() {
-    if(this.data.id) {
+    if(this.data.id) { //si el producto tiene id, ya existe y lo estamos actualizando
       this.productService.update(this.data).then(() => {
         this.snackService.launch("Producto actualizado", "Tiendita", 4000);
       })
         .catch(error => {
           this.snackService.launch("Error: " + error.message, "Tiendita", 4000);
         })
-    } else {
+    } else { //si el producto no tiene id, lo creamos
       this.productService.save(this.data).then(() => {
         this.snackService.launch("Producto creado", "Tiendita", 4000);
       })
